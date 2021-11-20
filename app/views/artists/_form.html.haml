@@ -1,0 +1,22 @@
+= form_with model: @artist do |f|
+  = f.label :name
+  = f.text_field :name
+  - if f.object.errors[:name].present?
+    %span= f.object.errors[:name].to_sentence
+    %br
+  %br
+  
+  = f.label :bio
+  = f.text_area :bio
+  - if f.object.errors[:bio].present?
+    %span= f.object.errors[:bio].to_sentence
+    %br
+  %br
+  
+  = f.submit
+  
+  %br
+  %br
+  
+  = link_to artists_path do
+    Back to Artists List
