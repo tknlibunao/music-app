@@ -1,0 +1,64 @@
+<h1>
+  Albums List
+</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th> Album </th>
+			<th> Type </th>
+			<th> Released </th>
+			<th> Year Released </th>
+			<th> Length </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @albums.each do |album| %>
+			<tr>
+				<td> <%= album.name %> </td>
+				<td> <%= album.kind %> </td>
+				<td>
+				  <%if album.released %>
+				    Yes
+			    <% else %>
+			      No
+		      <% end %>
+		    </td>
+		    <td>
+		      <% if album.released_at %>
+		        <%= album.released_at.year %>
+	        <% else %>
+	          TBA
+		      <% end %>
+        </td>
+				<td>
+				<% if album.duration_hours > 0 %>
+				  <%= album.duration_hours %>h
+				<% end %>
+				<% if album.duration_minutes > 0 %>
+				  <%= album.duration_minutes %>m
+				<% end %>
+				<% if album.duration_seconds > 0 %>
+				  <%= album.duration_seconds %>s
+				<% end %>
+				</td>
+				<td>
+					<%= link_to edit_album_path(album.id) do %>
+						Edit
+					<% end %>
+					|
+					
+					<%= link_to album_path(album.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+						Delete
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br/>
+
+<%= link_to new_album_path do%>
+	Add New Album
+<% end %>
