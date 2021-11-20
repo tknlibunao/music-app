@@ -1,0 +1,54 @@
+= form_with model: @album do |f|
+  = f.label :name
+  = f.text_field :name
+  - if f.object.errors[:name].present?
+    %span= f.object.errors[:name].to_sentence
+    %br
+  %br
+  
+  = f.label :kind, "Type"
+  = f.select :kind, ["Single", "Extended Play (EP)", "Long Play (LP)"]
+  - if f.object.errors[:name].present?
+    %span= f.object.errors[:name].to_sentence
+    %br
+  %br
+  
+  = f.label :duration_hours
+  = f.number_field :duration_hours, min: 0
+  - if f.object.errors[:duration_hours].present?
+    %span= f.object.errors[:duration_hours].to_sentence
+    %br
+  %br
+  
+  = f.label :duration_minutes
+  = f.number_field :duration_minutes, min: 0, max: 59
+  - if f.object.errors[:duration_minutes].present?
+    %span= f.object.errors[:duration_minutes].to_sentence
+    %br
+  %br
+  
+  = f.label :duration_seconds
+  = f.number_field :duration_seconds, min: 0, max: 59
+  - if f.object.errors[:duration_seconds].present?
+    %span= f.object.errors[:duration_seconds].to_sentence
+    %br
+  %br
+  
+  = f.label :released, 'Released?'
+  = f.radio_button :released, true
+  = f.label :released, 'Yes', :value => true
+  = f.radio_button :released, false
+  = f.label :released, 'No', :value => false
+
+  %br
+  
+  = f.date_select :released_at, :order => [:year], start_year: 1600, end_year: 2021
+  %br
+  
+  = f.submit
+  
+  %br
+  %br
+  
+  = link_to albums_path do
+    Back to Albums List
