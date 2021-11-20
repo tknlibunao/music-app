@@ -6,6 +6,19 @@
     %br
   %br
   
+  = f.label "Profile photo"
+  %br
+  
+  - if @artist.avatar.attached?
+    = image_tag @artist.avatar, height: '100px'
+    %br
+    = link_to purge_avatar_artist_path(@artist), method: :delete, data: { confirm: "Are you sure?" } do
+      Remove photo
+  %br
+
+  = f.file_field :avatar
+  %br  
+
   = f.label :bio
   = f.text_area :bio
   - if f.object.errors[:bio].present?
