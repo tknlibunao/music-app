@@ -1,0 +1,43 @@
+<h1>
+  Tracks List
+</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th> Track </th>
+			<th> Length </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @tracks.each do |track| %>
+			<tr>
+				<td> <%= track.name %> </td>
+				<td>
+				<% if track.duration_minutes > 0 %>
+				  <%= track.duration_minutes %>m
+				<% end %>
+				<% if track.duration_seconds > 0 %>
+				  <%= track.duration_seconds %>s
+				<% end %>
+				</td>
+				<td>
+					<%= link_to edit_track_path(track.id) do %>
+						Edit
+					<% end %>
+					|
+					
+					<%= link_to track_path(track.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+						Delete
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br/>
+
+<%= link_to new_track_path do%>
+	Add New Track
+<% end %>
