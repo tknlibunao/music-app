@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:edit, :update, :destroy]
+  before_action :set_artist, only: [:edit, :update, :destroy, :purge_avatar]
   
   def index
     @artists = Artist.all
@@ -35,6 +35,10 @@ class ArtistsController < ApplicationController
     redirect_to artists_path, notice: 'Artist data was deleted'
   end
   
+  def purge_avatar
+    @artist.avatar.purge
+  end
+  
   private
   
   def set_artist
@@ -42,6 +46,6 @@ class ArtistsController < ApplicationController
   end
   
   def artist_params
-    params.require(:artist).permit(:name, :bio)
+    params.require(:artist).permit(:name, :bio, :avatar)
   end
 end
