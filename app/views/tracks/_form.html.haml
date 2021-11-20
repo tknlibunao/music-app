@@ -1,0 +1,29 @@
+= form_with model: @track do |f|
+  = f.label :name
+  = f.text_field :name
+  - if f.object.errors[:name].present?
+    %span= f.object.errors[:name].to_sentence
+    %br
+  %br
+  
+  = f.label :duration_minutes
+  = f.number_field :duration_minutes, min: 0, max: 59
+  - if f.object.errors[:duration_minutes].present?
+    %span= f.object.errors[:duration_minutes].to_sentence
+    %br
+  %br
+  
+  = f.label :duration_seconds
+  = f.number_field :duration_seconds, min: 0, max: 59
+  - if f.object.errors[:duration_seconds].present?
+    %span= f.object.errors[:duration_seconds].to_sentence
+    %br
+  %br
+  
+  = f.submit
+  
+  %br
+  %br
+  
+  = link_to tracks_path do
+    Back to Tracks List
