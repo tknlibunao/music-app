@@ -5,6 +5,7 @@
 <table>
 	<thead>
 		<tr>
+		  <th> Profile Photo </th>
 			<th> Artist </th>
 			<th> Bio </th>
 		</tr>
@@ -12,6 +13,11 @@
 	<tbody>
 		<% @artists.each do |artist| %>
 			<tr>
+			  <td>
+			    <% if artist.avatar.attached? %>
+			      <image src="<%= (url_for(artist.avatar)) %>" height=100px>
+			    <% end %>
+			  </td>
 				<td> <%= artist.name %> </td>
 				<td> <%= artist.bio.truncate(30) %> </td>
 				<td>
