@@ -1,42 +1,51 @@
-<h1>
-  Artists List
-</h1>
+<div class="artists-container">
+  <div class="artists-sticky-header">
+    <span class="artists-header-title">ARTISTS</span>
+    <div class="artists-add-container">
+      <div class="artists-add-btn">
+        <a href="<%= new_artist_path %>">
+          Add new
+        </a>
+      </div>
+    </div>
+  </div>
 
-<table>
-	<thead>
-		<tr>
-		  <th> Profile Photo </th>
-			<th> Artist </th>
-			<th> Bio </th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @artists.each do |artist| %>
-			<tr>
-			  <td>
-			    <% if artist.avatar.attached? %>
-			      <image src="<%= (url_for(artist.avatar)) %>" height=100px>
-			    <% end %>
-			  </td>
-				<td> <%= artist.name %> </td>
-				<td> <%= artist.bio.truncate(30) %> </td>
-				<td>
-					<%= link_to edit_artist_path(artist.id) do %>
-						Edit
-					<% end %>
-					|
-					
-					<%= link_to artist_path(artist.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-						Delete
-					<% end %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+  <div class="artists-items-container">
+    <% @artists.each do |artist| %>
+      <div class="artists-item">
+        <div class="artist-delete-container">
+          <div class="artist-delete-btn">
+            <%= link_to artist_path(artist.id), method: :delete, data: { confirm: "Do you want to delete this artist?" } do %>
+					    ✕
+				    <% end %>
+          </div>
+        </div>
+        <div class="artists-avatar-container">
+          <% if artist.avatar.attached? %>
+            <image class="artists-avatar" src="<%= (url_for(artist.avatar)) %>">
+          <% else %>
+            <image class="artists-avatar" src="<%= asset_pack_path 'media/images/default.jpg' %>">
+          <% end %>
+        </div>
+        
+        <div class="artists-details-container">
+          <div class="artists-name">
+            <%= artist.name %>
+          </div>
+          <div class="artists-bio">
+            "<%= artist.bio.truncate(40) %>"
+          </div>
+        </div>
+        
+        <div class="artist-edit-container">
+          <a class="artist-edit-btn" href="<%= edit_artist_path(artist.id) %>">
+					  Edit
+          </a>
+        </div>
+        
+      </div>
+    <% end %>
+  </div>
 
-<br/>
-
-<%= link_to new_artist_path do%>
-	Add New Artist
-<% end %>
+  <br/>
+</div>
