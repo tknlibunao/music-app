@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :set_album, only: [:edit, :update, :destroy]
+  before_action :set_album, only: [:edit, :update, :destroy, :purge_cover_art]
   
   def index
     @albums = Album.all
@@ -35,6 +35,11 @@ class AlbumsController < ApplicationController
     redirect_to albums_path, notice: 'Album data was deleted'
   end
   
+  def purge_cover_art
+    @album.cover_art.purge
+    render :edit
+  end
+  
   private
   
   def set_album
@@ -42,6 +47,6 @@ class AlbumsController < ApplicationController
   end
   
   def album_params
-    params.require(:album).permit(:name, :kind, :duration_hours, :duration_minutes, :duration_seconds, :released, :released_at)
+    params.require(:album).permit(:name, :kind, :duration_hours, :duration_minutes, :duration_seconds, :released, :released_at, :cover_art)
   end
 end

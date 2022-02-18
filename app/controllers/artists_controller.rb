@@ -37,6 +37,7 @@ class ArtistsController < ApplicationController
   
   def purge_avatar
     @artist.avatar.purge
+    render :edit
   end
   
   private

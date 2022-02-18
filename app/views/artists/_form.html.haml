@@ -1,35 +1,45 @@
-= form_with model: @artist do |f|
-  = f.label :name
-  = f.text_field :name
-  - if f.object.errors[:name].present?
-    %span= f.object.errors[:name].to_sentence
-    %br
-  %br
-  
-  = f.label "Profile photo"
-  %br
-  
-  - if @artist.avatar.attached?
-    = image_tag @artist.avatar, height: '100px'
-    %br
-    = link_to purge_avatar_artist_path(@artist), method: :delete, data: { confirm: "Are you sure?" } do
-      Remove photo
-  %br
+.artists-container
+  .artists-form
+    = form_with model: @artist do |f|
+      .form-top-container
+        .form-avatar-container
+          = f.label "Profile photo"
+          %br
+          
+          - if @artist.avatar.attached?
+            .form-avatar
+              = image_tag @artist.avatar, height: '100px'
+            .remove
+              = link_to purge_avatar_artist_path(@artist), method: :delete, data: { confirm: "Are you sure?" } do
+                Remove photo
+          %br
 
-  = f.file_field :avatar
-  %br  
+          = f.file_field :avatar
+          %br 
+      = f.label :name
+      %br
+      
+      = f.text_field :name
+      - if f.object.errors[:name].present?
+        %span= f.object.errors[:name].to_sentence
+        %br
+      %br
+      
+       
 
-  = f.label :bio
-  = f.text_area :bio
-  - if f.object.errors[:bio].present?
-    %span= f.object.errors[:bio].to_sentence
-    %br
-  %br
-  
-  = f.submit
-  
-  %br
-  %br
-  
-  = link_to artists_path do
-    Back to Artists List
+      = f.label :bio
+      %br
+      = f.text_area :bio
+      - if f.object.errors[:bio].present?
+        %span= f.object.errors[:bio].to_sentence
+        %br
+      %br
+      %br
+      
+      = f.submit :class => "btn"
+      
+      %br
+      %br
+      .back
+        = link_to artists_path do
+          Back to Artists List

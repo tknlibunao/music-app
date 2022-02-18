@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :albums
+  resources :albums do
+    member do
+      delete :purge_cover_art
+    end
+  end
+  
   resources :tracks
 end

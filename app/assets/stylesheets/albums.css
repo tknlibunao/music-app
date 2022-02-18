@@ -1,5 +1,4 @@
-/* INDEX PAGE */
-.artists-container {
+.albums-container {
   background-color: #c8ae7e;
   display: flex;
   flex-direction: column;
@@ -7,7 +6,7 @@
   align-items: center;
 }
 
-.artists-sticky-header {
+.albums-sticky-header {
   background-color: #0a020a;
   width: 100%;
   display: flex;
@@ -21,7 +20,16 @@
 box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.artists-header-title {
+.albums-header-container {
+  width: 20rem;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.albums-header-title {
   color: #eae3c9;
   text-align: center;
   font-size: 3rem;
@@ -29,7 +37,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   letter-spacing: 0.2rem;
 }
 
-.artists-add-container {
+.album-add-container {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -39,8 +47,8 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   right: 0px;
 }
 
-.artists-add-btn {
-  background-color: #354a21;;
+.albums-add-btn {
+  background-color: #354a21;
   color: #fafdf3;
   width: 2.5rem;
   height: 2.5rem;
@@ -53,11 +61,11 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   transition: all 0.2s ease-in;
 }
 
-.artists-add-btn:hover {
+.albums-add-btn:hover {
   background-color: #607d3b;
 }
 
-.artists-items-container {
+.albums-items-container {
   width: 100%;
   height: auto;
   display: flex;
@@ -68,78 +76,97 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   margin-top: 1rem;
 }
 
-.artists-item {
+.albums-item {
   background-color: #fafdf3;
-  width: 330px;
-  height: 400px;
+  width: 360px;
+  height: 420px;
   display: block;
   margin:1.75rem;
-  padding: 1rem;
+  padding: 0.5rem;
 	border-radius: 0.25rem;
 	--tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   position: relative;
+  transition: all 0.2s ease-out;
 }
 
-.artists-avatar-container {
+.albums-item:hover {
+  background-color: rgba(142, 99, 61, 1);
+  color: #fafdf3;
+}
+
+.placeholder {
   width: 100%;
-  height: 15rem;
+  height: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.albums-cover-art-container {
+  width: 100%;
+  height: 17rem;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 0.75rem;
 }
 
-.artists-avatar {
-  height: 15rem;
-  border-radius: 50%;
-  outline: 0.25rem solid #d2bd96;
+.albums-cover-art {
+  height: 17rem;
+  border-radius: 0.15rem;
+  outline: 0.15rem solid #d2bd96;
   --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
 box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.artists-details-container {
+.albums-details-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 0.85rem;
   text-align: center;
 }
 
-.artists-name {
-  width: 100%;
+.albums-name {
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
   font-weight: 500;
 }
 
-.artists-bio {
-  width: 100%;
+.albums-details {
+  width: 80%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-style: italic;
+  justify-content: flex-start;
+  font-size: 1rem;
 }
 
-.artist-btn-container {
-  width: 330px;
-  height: 380px;
+.album-btn-container {
+  width: 360px;
+  height: 420px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   padding-right: 30px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   opacity: 0;
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
 }
 
-.artist-btn-container:hover {
+.album-btn-container:hover {
   opacity: 1;
 }
 
-.artist-delete-container {
+.album-delete-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -152,91 +179,54 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   left: 0;
 }
 
-.artist-delete-btn {
-  color: #af4035;
+.album-delete-btn {
+  color: #fafdf3;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
   text-align: center;
   font-size: 1.25rem;
-  transition: all 0.1s ease-in;
+  transition: all 0.05s ease-in;
   opacity: 0.5;
 }
 
-.artist-delete-btn:hover {
+.album-delete-btn:hover {
   opacity: 1;
 }
 
-.artist-edit-btn {
-  background-color: #607d3b;
+.album-edit-btn {
+  background-color: #354a21;
   color: #fafdf3;
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 230px;
-  right: 60px;
-  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   border-radius: 50%;
   --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
 box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   transition: all 0.2s ease-out;
 }
 
-.artist-edit-btn:hover {
-  background-color: #354a21;
-  transform: translateY(-0.15rem);
+.album-edit-btn:hover {
+  transform: translateY(-8px);
 }
 
-/* FORM PARTIAL */
-.create, .edit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-}
-
-
-.artists-form {
-  background-color: rgba(142, 99, 61, 1);
-  width: 30%;
-  height: auto;
-  display: block;
-  margin-top: 1rem;
-  padding: 1rem;
+.btn {
+  background-color: #0a020a;
+  border: none;
   border-radius: 0.25rem;
-  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.form-top-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
-}
 
-.form-avatar-container {
-  width: 160px;
-  height: 100%;
-  display: block;
-  margin-bottom: 1rem;
-}
 
-.form-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-left: 1rem;
-}
 
-.remove {
-  margin-left: 1rem;
-}
-
-.remove:hover, .back:hover {
-  text-decoration: underline;
-}

@@ -1,43 +1,68 @@
-<h1>
-  Tracks List
-</h1>
-
-<table>
-	<thead>
-		<tr>
-			<th> Track </th>
-			<th> Length </th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @tracks.each do |track| %>
-			<tr>
-				<td> <%= track.name %> </td>
-				<td>
-				<% if track.duration_minutes > 0 %>
-				  <%= track.duration_minutes %>m
-				<% end %>
-				<% if track.duration_seconds > 0 %>
-				  <%= track.duration_seconds %>s
-				<% end %>
-				</td>
-				<td>
-					<%= link_to edit_track_path(track.id) do %>
-						Edit
-					<% end %>
-					|
-					
-					<%= link_to track_path(track.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-						Delete
-					<% end %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<br/>
-
-<%= link_to new_track_path do%>
-	Add New Track
-<% end %>
+<div class="tracks-container">
+  <div class="tracks-sticky-header">
+    <div class="tracks-header-container">
+      <span class="tracks-header-title">TRACKS</span>
+      <div class="track-add-container">
+        <a class="tracks-add-btn" href="<%= new_track_path %>">
+          ✚
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tracks-table-header">
+    <div class="tracks-column-number">
+      #
+    </div>
+    <div class="tracks-column-name">
+      TITLE
+    </div>
+    <div class="tracks-column-length">
+ 			⌛︎
+    </div>
+  </div>
+  
+  <div class="tracks-items-container">
+    <% ctr = 1 %>
+    <% @tracks.each do |track| %>
+      <div class="tracks-item">
+        <div class="track-delete-container">
+          <div class="track-delete-btn">
+            <%= link_to track_path(track.id), method: :delete, data: { confirm: "Do you want to delete this track?" } do %>
+				      ✕
+			      <% end %>
+          </div>
+        </div>
+      
+        <div class="tracks-number">
+          <%= ctr %>
+        </div>
+        
+        <div class="tracks-name">
+          <a class="track-edit-link" href="<%= edit_track_path(track.id) %>">
+            <%= track.name %>
+          </a>
+        </div>
+        
+        <div class="tracks-length">
+          <div class="tracks-minutes">
+            <% if track.duration_minutes > 0 %>
+				      <%= track.duration_minutes %>:
+				    <% end %>
+          </div>
+				  <div class="tracks-seconds">
+				    <% if track.duration_seconds == 0 %>
+				      00
+				    <% elsif track.duration_seconds > 0 and track.duration_seconds < 10 %>
+				      0<%= track.duration_seconds %>
+			      <% else %>
+			        <%= track.duration_seconds %>
+				    <% end %>
+				  </div>
+        </div>
+      </div>
+      
+      <% ctr = ctr + 1 %>
+    <% end %>
+  </div>
+</div>

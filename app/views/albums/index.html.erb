@@ -1,64 +1,64 @@
-<h1>
-  Albums List
-</h1>
+<div class="albums-container">
+  <div class="albums-sticky-header">
+    <div class="albums-header-container">
+      <span class="albums-header-title">ALBUMS</span>
+      <div class="album-add-container">
+        <a class="albums-add-btn" href="<%= new_album_path %>">
+          ✚
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="albums-items-container">
+    <% @albums.each do |album| %>
+      <div class="albums-item">
+        <div class="placeholder">
 
-<table>
-	<thead>
-		<tr>
-			<th> Album </th>
-			<th> Type </th>
-			<th> Released </th>
-			<th> Year Released </th>
-			<th> Length </th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @albums.each do |album| %>
-			<tr>
-				<td> <%= album.name %> </td>
-				<td> <%= album.kind %> </td>
-				<td>
-				  <%if album.released %>
-				    Yes
-			    <% else %>
-			      No
-		      <% end %>
-		    </td>
-		    <td>
-		      <% if album.released_at %>
-		        <%= album.released_at.year %>
-	        <% else %>
-	          TBA
-		      <% end %>
-        </td>
-				<td>
-				<% if album.duration_hours > 0 %>
-				  <%= album.duration_hours %>h
-				<% end %>
-				<% if album.duration_minutes > 0 %>
-				  <%= album.duration_minutes %>m
-				<% end %>
-				<% if album.duration_seconds > 0 %>
-				  <%= album.duration_seconds %>s
-				<% end %>
-				</td>
-				<td>
-					<%= link_to edit_album_path(album.id) do %>
-						Edit
-					<% end %>
-					|
-					
-					<%= link_to album_path(album.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-						Delete
-					<% end %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+        </div>
+        
+        <div class="albums-cover-art-container">
+          <% if album.cover_art.attached? %>
+            <image class="albums-cover-art" src="<%= (url_for(album.cover_art)) %>">
+          <% else %>
+            <image class="albums-cover-art" src="<%= asset_pack_path 'media/images/cover-art-default.png' %>">
+          <% end %>
+        </div>
+        
+        <div class="albums-details-container">
+          <div class="albums-name">
+            <%= album.name.truncate(26) %>
+          </div>
+          <div class="albums-details">
+            <% if album.released %>
+		          <%= album.released_at.year %> 
+	          <% else %>
+	            Soon
+		        <% end %>
+		        • <%= album.kind %>
+          </div>
 
-<br/>
+          
+        </div>
+        
+        
+        <div class="album-btn-container">
+          <div class="album-delete-container">
+            <div class="album-delete-btn">
+              <%= link_to album_path(album.id), method: :delete, data: { confirm: "Do you want to delete this album?" } do %>
+					      ✕
+				      <% end %>
+            </div>
+          </div>
+        
+          <a class="album-edit-btn" href="<%= edit_album_path(album.id) %>">
+				    &#9776;
+          </a>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
 
-<%= link_to new_album_path do%>
-	Add New Album
-<% end %>
+  <br/>
+</div>
